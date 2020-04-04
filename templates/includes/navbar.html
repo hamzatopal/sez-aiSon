@@ -1,0 +1,60 @@
+
+<style>
+li a {
+  display: block;
+  color: #000;
+  padding: 6px 14px;
+  text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+  background-color: #CCE2F7;
+  color: white;
+}
+</style>
+<nav class="navbar navbar-expand-lg bg-light navbar-light  mt-4 mb-4">
+        <div class="navbar-header"><a class="navbar-brand" href="/"><h2>sez-ai</h2></a></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/">sez-ai <span class="sr-only">(current)</span></a>
+            </li>
+            
+            <li class="nav-item active">
+                <a class="nav-link" href="/articles">Makaleler</a>
+              </li>
+          
+            
+          </ul>
+          <ul class="navbar-nav ml-auto">
+          {% if request.user.is_authenticated %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/articles/dashboard">Kontrol Paneli</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/user/logout">Cikis Yap</a>
+            </li>
+
+          {% else %}
+            <li class="nav-item active">
+              <a class="nav-link" href="/user/login">Giris Yap</a>
+            </li>
+
+          {% endif %}
+
+          
+            
+            <li class="nav-item active">
+              <a class="nav-link" href="/user/register">Kayit Ol</a>
+            </li>
+            
+            
+          </ul>
+        </div>
+      </nav>
+      

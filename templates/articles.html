@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="row">
+<div class="col-md-6 ml-lg-3">
+
+<h2>Makaleler</h2>
+<hr>
+<form>
+{% csrf_token %}
+<input type="text" name="keyword" class="input-group-sm mb-2" maxlength="50" placeholder="">
+<button type="submit" class="btn btn-primary">Ara</button>
+</form>
+</div>
+</div>
+{% if articles %}
+{% for article in articles %}
+
+
+      <!-- Post Content Column -->
+      <div class="col-md-10">
+        <!-- Title -->
+        <a href="/articles/article/{{article.id}}"><h2 class="mt-4">{{article.title}}</h2></a>
+        <!-- Author -->
+        <p class="lead">
+         
+          {{article.author.username}} tarafından yayımlandı.
+        </p>
+        <hr>
+        <!-- Date/Time -->
+        <p>Yayimlanma Tarihi - {{article.created_date}}</p>
+        <hr>
+        {% if article.article_image %}
+        <a href="/articles/article/{{article.id}}"><img class="img-fluid rounded" src="{{article.article_image.url}}" alt=""></a>
+        
+        {% endif %}
+        <!-- Preview Image -->
+        
+        <hr>
+        <!-- Post Content -->
+        <p class="lead">
+        {{article.content|safe|truncatewords:30}}
+        </p>
+        <a href="/articles/article/{{article.id}}" class="btn btn-secondary">devamını oku</a>
+        <hr>
+      
+      </div>
+    
+{% endfor %}
+{% if articles.has_previous %}
+            <a href="?page=1">&laquo; ilk</a>
+            <a href="?page={{ articles.previous_page_number }}">geri</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ articles.number }} of {{ articles.paginator.num_pages }}.
+        </span>
+
+        {% if articles.has_next %}
+            <a href="?page={{ articles.next_page_number }}">ileri</a>
+            <a href="?page={{ articles.paginator.num_pages }}">son &raquo;</a>
+        {% endif %}
+       
+{% else %}
+ 
+<div class="col-md-10">
+<div class="alert alert-danger mt-2">
+Makale Bulunmuyor ! ...
+</div>
+</div>
+{% endif %}
+<hr />
+{% endblock body  %}
